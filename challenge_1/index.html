@@ -1,2 +1,67 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="styles.css">
+  
+  <!--[if lt IE 9]>
+    script(src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js")
+    script(src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js")
+  <![endif]-->
+</head>
+<body>
+  <header>
+    
+    <h1> Tick Tack Toe </h1>
+    
+    <div class="row scores">
 
+      <div class="col score">
+        <h3 class="score-header">X<span id='user1'></span></h3>
+        <p id='score-x' class="score-body">0</p>
+      </div>
 
+      <div class="col score">
+        <h3 class="score-header">O<span id='user2'></span></h3>
+        <p id='score-o' class="score-body">0</p>
+      </div>
+
+    </div>
+
+    
+  </header>
+
+  <main>
+    <div id="board">
+
+      <div class="row">
+        <div id='s0' class="col"></div>
+        <div id='s1' class="col"></div>
+        <div id='s2' class="col"></div>
+      </div>
+
+      <div class="row">
+        <div id='s3' class="col"></div>
+        <div id='s4' class="col"></div>
+        <div id='s5' class="col"></div>
+      </div>
+
+      <div class="row">
+        <div id='s6' class="col"></div>
+        <div id='s7' class="col"></div>
+        <div id='s8' class="col"></div>
+      </div>
+
+    </div>
+    <button id="reset"> reset </button>
+  </main>
+
+  <footer>
+    
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
