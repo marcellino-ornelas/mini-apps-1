@@ -14,11 +14,9 @@ $(function(){
     
     event.preventDefault();
 
-
-
-    $.post('/csv', $json.val(), function(data) {
+    $.post('/csv', JSON.stringify($json.val()), function(data) {
       
-      console.log('we hit home base');
+      $results.text(data);
 
     });
 

@@ -3,7 +3,10 @@ const path = require('path')
 
 const app = express();
 
-app.use( express.static(__dirname + '/client') )
+app.use( express.static(path.join(__dirname,'client/')) );
+
+// home made body
+app.use( bodyParser );
 
 app.get('/', function(req, res) {
   
@@ -12,9 +15,25 @@ app.get('/', function(req, res) {
 });
 
 app.post('/csv', function(req, res) {
-  res.send('you hit me')
+  console.log(req.body)
+  res.send('you hit me');
 });
 
 app.listen(3000,function() {
   console.log('SERVER IS NOW RUNNING ON PORT 3000');
 });
+
+function bodyParser(req,res,next) {
+
+  var requestedData = '';
+  
+  req.on('data', function(chunk) {
+    requestedData += chunk;
+  });
+
+  req.on('end', function() {
+    req.body = JSON.parse(requestedData);
+    next();
+  });
+
+}
