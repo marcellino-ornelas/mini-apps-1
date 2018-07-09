@@ -1,0 +1,22 @@
+{
+  "name": "hrsf99-mini-apps-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcellino-ornelas/hrsf99-mini-apps-1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcellino-ornelas/hrsf99-mini-apps-1/issues"
+  },
+  "homepage": "https://github.com/marcellino-ornelas/hrsf99-mini-apps-1#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
