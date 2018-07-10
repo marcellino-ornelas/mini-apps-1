@@ -1,5 +1,7 @@
 const express = require('express');
-const path = require('path')
+const path = require('path');
+
+const csv = require('./csv');
 
 const app = express();
 
@@ -15,13 +17,23 @@ app.get('/', function(req, res) {
 });
 
 app.post('/csv', function(req, res) {
-  console.log(req.body)
-  res.send('you hit me');
+  var data;
+  try {
+    data = csv(req.body);
+  } catch(e) {
+    data = res.statusMessage = "Invalid json value";
+    res.status(400);
+  }
+  
+  res.send( data );
 });
+
 
 app.listen(3000,function() {
   console.log('SERVER IS NOW RUNNING ON PORT 3000');
 });
+
+
 
 function bodyParser(req,res,next) {
 

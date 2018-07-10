@@ -4,7 +4,7 @@ $(function(){
   var $results = $('#results');
   var $json = $('#json');
   
-
+  // templates
 
   /*
    * Events 
@@ -15,9 +15,14 @@ $(function(){
     event.preventDefault();
 
     $.post('/csv', JSON.stringify($json.val()), function(data) {
-      
-      $results.text(data);
 
+      var $sections = data.split('\n').map(function(item){
+        return $('<p>').text( item );
+      });
+      
+      $results.html($sections);
+      $json.val('');
+      
     });
 
   });
