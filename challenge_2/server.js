@@ -18,6 +18,7 @@ app.get('/', function(req, res) {
 
 app.post('/csv', function(req, res) {
   var data;
+  console.log(req.body)
   try {
     data = csv(req.body);
   } catch(e) {

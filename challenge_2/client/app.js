@@ -3,6 +3,7 @@ $(function(){
   var $csvConverter = $('form');
   var $results = $('#results');
   var $json = $('#json');
+  var filter = $('#filter');
   
   // templates
 
@@ -14,7 +15,13 @@ $(function(){
     
     event.preventDefault();
 
-    $.post('/csv', JSON.stringify($json.val()), function(data) {
+    var data = $csvConverter.serializeArray();
+
+    data = data.reduce()
+
+    $.post('/csv', JSON.stringify({
+      
+    }), function(data) {
 
       var $sections = data.split('\n').map(function(item){
         return $('<p>').text( item );
@@ -22,7 +29,7 @@ $(function(){
       
       $results.html($sections);
       $json.val('');
-      
+
     });
 
   });

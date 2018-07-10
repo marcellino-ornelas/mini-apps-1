@@ -14,23 +14,47 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+  <style>
+    .helper-text {
+      color: grey;
+    }
+  </style>
 </head>
 <body>
 
   <header>
     <h1> JSON to CSV </h1>
   </header>
-  <main>
-    <div>
-      <form action="/csv" method="POST">
-        <textarea id='json' name="text"></textarea>
-        <button> Submit </button>
+  <main class="container">
+    <div class="row">
+      
+      <form class='s12' action="/csv" method="POST">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id='filter' type="text" class="validate">
+            <label for="filter">filter</label>
+            <span class="helper-text" data-error="wrong" data-success="right">Coma separated values</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea class="materialize-textarea" id='json'></textarea>
+            <label for="json"> json </label>
+          </div>
+        </div>
+        <div class="row">
+          <button class='btn btn-waves'> Submit </button>
+        </div>
       </form>
+
     </div>
     <div id="results"></div>
   </main>
   <footer></footer>
-
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
