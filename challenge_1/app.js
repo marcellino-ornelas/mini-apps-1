@@ -3,30 +3,59 @@
 */
 document.addEventListener("DOMContentLoaded", function() {
 
+  /*
+   * Modal
+  */
+
+  function Modal(node){
+    this.node = node;
+    this.isOpen = false;
+  }
+
+  Modal.prototype.open = function(first_argument) {
+    
+  };
+
+  Modal.prototype.close = function(first_argument) {
+    
+  };
+  
+
+  /*
+   * Variables
+  */
   var board = document.getElementById('board');
   var reset = document.getElementById('reset');
   var cols = board.getElementsByClassName('col');
+  var initSheet = document.getElementById('init');
   
-  var promptMessage = 'what is your name?';
+  // var promptMessage = 'what is your name?';
   
-  // get names for players
-  var users = [ prompt('X: ' + promptMessage), prompt('O: ' + promptMessage) ];
+  // // get names for players
+  // var users = [ prompt('X: ' + promptMessage), prompt('O: ' + promptMessage) ];
   
-  // display names
-  for ( let i = 0; i < 2; i++ ) {
-    let el = document.getElementById('user' + (i + 1) );
-    appendText( el, '( ' + users[i] + ' )' );
-  }
-  
+  // // display names
+  // for ( let i = 0; i < 2; i++ ) {
+  //   let el = document.getElementById('user' + (i + 1) );
+  //   appendText( el, '( ' + users[i] + ' )' );
+  // }
+  console.log()
   var game = {
     turn: 0,
     pieces: ['x', 'o'],
     scores: [0, 0],
-    users: users,
+    // users: users,
     board: [],
     BOARD_MAX_LENGTH: 9,
     BOARD_MAX_COL_LENGTH: 3,
     hasEnded: false,
+    initSheet: null,
+    init: function() {
+      
+      // this.initSheet.open();
+
+
+    },
 
     getId: function( el ) {
       return el.id.split('')[1];
@@ -127,9 +156,6 @@ document.addEventListener("DOMContentLoaded", function() {
     },
   };
 
-
-
-
   /*
    * events 
   */
@@ -171,6 +197,8 @@ document.addEventListener("DOMContentLoaded", function() {
     game.hasEnded = false;
 
   });
+
+  game.init();
 
 
   /*

@@ -31,7 +31,6 @@
 
     </div>
 
-    
   </header>
 
   <main>
@@ -56,12 +55,29 @@
       </div>
 
     </div>
-    <button id="reset"> reset </button>
+    <button id="reset" class='btn'> reset </button>
   </main>
 
-  <footer>
-    
-  </footer>
+  <div id="init" class="modal">
+    <div class="modal-content">
+      <h2> Welcome to Tick Tack Toe </h2>
+      <h3> Complete the info below to start your game </h3>
+      <form action="">
+        <div class="input-field">
+          <input type="text" placeholder="player 1">
+        </div>
+        <div class="input-field">
+          <input type="text" placeholder="player 2">
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close">Start Game</a>
+    </div>
+  </div>
+
+
+  <div id="overlay"></div>
   <script src="app.js"></script>
 </body>
 </html>
