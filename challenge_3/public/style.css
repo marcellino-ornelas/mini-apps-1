@@ -1,0 +1,33 @@
+/*
+ * css 
+*/
+
+
+body {
+  margin: 0;
+}
+
+
+
+
+
+
+/**************************
+  Additional Classes 
+***************************/
+
+.hide {
+  display: none;
+}
+
+.btn {
+  border: 1px solid #00ef00;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: palegreen;
+  margin: 5px;
+}
+
+.btn .large {
+  padding: 15px 25px;
+}
