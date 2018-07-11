@@ -10,23 +10,25 @@ app.use( express.static(path.join(__dirname,'client/')) );
 // home made body
 app.use( bodyParser );
 
-app.get('/', function(req, res) {
-  
-  res.sendFile( path.join(__dirname,'client/index.html') )
-
-});
-
-app.post('/csv', function(req, res) {
+app.post('/csv', function(req, res, next) {
   var data;
-  console.log(req.body)
+  console.log('data', req.body)
   try {
     data = csv(req.body);
   } catch(e) {
-    data = res.statusMessage = "Invalid json value";
-    res.status(400);
+    console.log(e)
+    next( new Error("Invalid json value") );
   }
   
   res.send( data );
+});
+
+
+
+app.use(function(err,req,res,next){
+  console.log('err: ', err)
+  res.statusMessage = err.message;
+  res.status(505).send( err );
 });
 
 
