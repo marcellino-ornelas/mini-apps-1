@@ -1,6 +1,3 @@
-
-
-
 /*
  * App
 */
@@ -48,6 +45,7 @@ class CheckOut extends React.Component {
 
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
+    this.sendProgress = this.sendProgress.bind(this);
 
   }
 
@@ -67,13 +65,34 @@ class CheckOut extends React.Component {
     this.setState({ index: newIndex });
   }
 
+  sendProgress(url, data) {
+    return fetch( url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(data)
+    })
+    .then(function(results){
+      return results.json();
+    })
+    .then(function(data) {
+      console.log(data);
+    })
+    // .then(function(){
+      // save state here?
+    // })
+  }
+
   render() {
     var sections = [CheckOutHome, AccountCreation, Address, Payment ];
     var Section = sections[ this.state.index ];
 
     return (
       <div>
-        <Section next={ this.next } prev={ this.prev } />
+        <Section next={ this.next } prev={ this.prev } sendProgress={ this.sendProgress } />
       </div>
     )
   }
@@ -81,7 +100,9 @@ class CheckOut extends React.Component {
 
 var CheckOutHome = (props) => {
   var handleStartCheckout = () => {
-    props.next();
+    props
+      .sendProgress('/f0', {})
+      .then( ()=> props.next() );
   };
 
   return (
@@ -107,7 +128,11 @@ class AccountCreation extends React.Component {
   }
   
   submit( data ) {
-    this.props.next();
+    this.props.sendProgress('/f1', data)
+    .then((data) => {
+      this.props.next() 
+    })
+    
   }
 
   render() {
@@ -292,6 +317,11 @@ class Form extends React.Component {
     )
   }
 }
+
+
+/*
+ * Helper Functions
+*/
 
 ReactDOM.render( <App />, document.getElementById('app') );
 
