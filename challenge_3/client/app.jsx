@@ -23,14 +23,10 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div>
-        <CheckOut start={ this.state.start } />
-        <div>
-          <button 
-            className="btn"
-            onClick={ this.startProcess }>check out</button>
-        </div>
+        <CheckOut />
       </div>
     )
   }
@@ -72,66 +68,31 @@ class CheckOut extends React.Component {
   }
 
   render() {
-    var sections = [AccountCreation, Address, Payment ];
+    var sections = [CheckOutHome, AccountCreation, Address, Payment ];
     var Section = sections[ this.state.index ];
 
     return (
-      <div className={ this.props.start ? '' : 'hide' }>
+      <div>
         <Section next={ this.next } prev={ this.prev } />
       </div>
     )
   }
 }
 
-/*
- * Check Out Controls
-*/
+var CheckOutHome = (props) => {
+  var handleStartCheckout = () => {
+    props.next();
+  };
 
-var CheckoutControls = (props) => (
-  <div className='checkout-continuation'>
-    <button onClick={ props.prev }> pre </button>
-    <input type='submit' onClick={ props.next } value={ (props.nextTitle || 'next') } />
-  </div>
-)
-
-
-/*
- * Form
-*/
-
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.tracker = this.tracker.bind(this);
-  }
-  
-  handleSubmit(event) {
-    event.preventDefault();
-    console.log('form submitting is now working')
-    this.props.submit( this.state );
-  }
-
-  tracker(event) {
-    var {name, value} = event.currentTarget;
-
-    var newState = {};
-    newState[ name ] = value;
-
-    this.setState(newState);
-  }
-
-  render() {
-    return (
-      <form onSubmit={ this.handleSubmit }>
-        {this.props.render(this)}
-      </form>
-    )
-  }
-}
+  return (
+    <div>
+      <h2> Ready to checkout? </h2>
+      <button 
+        className='btn'
+        onClick={ handleStartCheckout }>check out</button>
+    </div>
+  )
+};
 
 
 /*
@@ -143,27 +104,33 @@ class AccountCreation extends React.Component {
     super(props);
 
     this.submit = this.submit.bind(this);
-
-    this.state = {};
   }
   
   submit( data ) {
-    console.log(data)
     this.props.next();
   }
 
   render() {
+    var self = this;
     return (
       <div>
         <h2> Account Creation </h2>
 
         <Form submit={ this.submit } render={(form) => (
           <div>
-            <input type="text" name="name" onKeyUp={form.tracker} />
-            <input type="email" name="email" onKeyUp={form.tracker} />
-            <input type="password" name="password" onKeyUp={form.tracker} />
-            {/*<input type="submit" value="submit"/>*/}
-            <CheckoutControls next={this.submit} prev={ this.props.prev } />
+            <div>
+              <label htmlFor="name"> Name: </label>
+              <input id="name" type="text" name="name" onKeyUp={form.tracker} />
+            </div>
+            <div>
+              <label htmlFor="email"> Email: </label>
+              <input id="email" type="email" name="email" onKeyUp={form.tracker} />
+            </div>
+            <div>
+              <label htmlFor="password"> Password: </label>
+              <input id="password" type="password" name="password" onKeyUp={form.tracker} />
+            </div>
+            <CheckoutControls next={self.props.next} prev={ self.props.prev } />
           </div>
         )} />
         
@@ -192,7 +159,37 @@ class Address extends React.Component {
     return (
       <div>
         <h2> Address Info </h2>
-        <CheckoutControls next={this.submit} prev={ this.props.prev } />
+
+        <Form submit={ this.submit } render={(form) => (
+          <div>
+            <div>
+              <label htmlFor="line1"> address 1: </label>
+              <input id="line1" type="text" name="line1" onKeyUp={form.tracker} />
+            </div>
+            <div>
+              <label htmlFor="line2"> address 2: </label>
+              <input id="line2" type="text" name="line2" onKeyUp={form.tracker} />
+            </div>
+            <div>
+              <label htmlFor="city"> City: </label>
+              <input id="city" type="text" name="city" onKeyUp={form.tracker} />
+            </div>
+            <div>
+              <label htmlFor="state"> State: </label>
+              <input id="state" type="text" name="state" onKeyUp={form.tracker} />
+            </div>
+            <div>
+              <label htmlFor="zipCode"> Zip code: </label>
+              <input id="zipCode" type="text" name="zipCode" onKeyUp={form.tracker} />
+            </div>
+            <div>
+              <label htmlFor="number"> Phone number: </label>
+              <input id="number" type="text" name="number" onKeyUp={form.tracker} />
+            </div>
+            <CheckoutControls prev={ this.props.prev } />
+          </div>
+        )} />
+
       </div>
     )
   }
@@ -218,13 +215,83 @@ class Payment extends React.Component {
     return (
       <div>
         <h2> Payment Info </h2>
-        <CheckoutControls next={this.submit} prev={ this.props.prev } nextTitle='Purchase' />
+
+        <Form submit={ this.submit } render={(form) => (
+          <div>
+            <div>
+              <label htmlFor="cardNumber"> Card number: </label>
+              <input id="cardNumber" type="text" name="cardNumber" onKeyUp={form.tracker} />
+            </div>
+            <div>
+              <label htmlFor="expiryDate"> Expiry date: </label>
+              <input id="expiryDate" type="text" name="expiryDate" onKeyUp={form.tracker} />
+            </div>
+            <div>
+              <label htmlFor="cvv"> cvv: </label>
+              <input id="cvv" type="text" name="cvv" onKeyUp={form.tracker} />
+            </div>
+            <div>
+              <label htmlFor="billingZipCode"> Billing zip code: </label>
+              <input id="billingZipCode" type="text" name="billingZipCode" onKeyUp={form.tracker} />
+            </div>
+            <CheckoutControls prev={ this.props.prev } />
+          </div>
+        )} />
+
       </div>
     )
   }
 }
 
+/*
+ * Check Out Controls
+*/
 
+var CheckoutControls = (props) => (
+  <div className='checkout-continuation'>
+    <button type='button' onClick={ props.prev }> pre </button>
+    <input type='submit' value={ (props.nextTitle || 'next') } />
+  </div>
+)
+
+
+/*
+ * Form
+*/
+
+class Form extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.tracker = this.tracker.bind(this);
+  }
+  
+  handleSubmit(event) {
+    event.preventDefault();
+
+    this.props.submit( this.state );
+  }
+
+  tracker(event) {
+    var {name, value} = event.currentTarget;
+
+    var newState = {};
+    newState[ name ] = value;
+
+    this.setState(newState);
+  }
+
+  render() {
+    return (
+      <form onSubmit={ this.handleSubmit }>
+        {this.props.render(this)}
+      </form>
+    )
+  }
+}
 
 ReactDOM.render( <App />, document.getElementById('app') );
 
