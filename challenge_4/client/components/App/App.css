@@ -1,0 +1,36 @@
+/*
+ * App CSS Styles
+*/
+
+.c4-board {
+  width: 80%;
+  margin: auto;
+  height: 600px;
+  display: flex;
+  background-color: lightgrey;
+}
+
+.c4-col {
+  width: 11%;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.c4-col:nth-last-child(1n+2) {
+  border-right: 2px solid black;
+}
+
+.c4-piece {
+  height: 40px;
+  width:100%;
+  border-radius: 100px;
+}
+
+.c4-piece.red {
+  background-color: red;
+}
+
+.c4-piece.black {
+  background-color: black
+}
